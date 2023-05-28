@@ -1,0 +1,29 @@
+specVersion: 0.0.4
+description: This subgraph tracks each time a new moment is minted on DG Live
+repository: https://github.com/gabrielmellace1/DGLiveMoments
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: DGLiveMoments
+    network: matic
+    source:
+      address: "0x7fa703af90e17672b9e3449582b2353fbdaa10e3"
+      abi: DGLiveMoments
+      startBlock: 43228679
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - MintedNFT
+        - BurnedNFT
+      abis:
+        - name: DGLiveMoments
+          file: DGLiveMoments\abis\DGLiveMoments.json
+      eventHandlers:
+        - event: MintedNFT(address,uint256,string,uint256)
+          handler: handleMintedNFT
+        - event: BurnedNFT(uint256,address)
+          handler: handleBurnedNFT
+      file: DGLiveMoments\DGLiveMoments.wasm

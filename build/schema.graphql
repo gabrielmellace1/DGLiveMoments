@@ -1,0 +1,13 @@
+type MintedNFT @entity {
+  id: ID!
+  creator: Bytes!
+  tokenId: BigInt!
+  uri: String!
+  timestamp: BigInt!
+}
+
+type BurnedNFT @entity {
+  id: ID!
+  tokenId: BigInt!
+  sender: Bytes!
+}
